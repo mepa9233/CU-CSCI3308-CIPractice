@@ -3,6 +3,7 @@ install:
 	dep
 language: c
 compiler: gcc
+sudo: required
 script:
 	make
 	test
