@@ -1,3 +1,4 @@
+
 /*
  * geometry_test.c
  * Andy Sayler
@@ -145,7 +146,6 @@ START_TEST(test_2d_midpoint)
 }
 END_TEST
 
-/* coord_2d_area Test */
 START_TEST(test_2d_area_triangle)
 {
     coord_2d_t a;
@@ -154,7 +154,7 @@ START_TEST(test_2d_area_triangle)
 
     a.x = b.x = c.x = 0;
     a.y = b.y = c.y = 0;
-    ck_assert(coord_2d_dist(&a, &b, &c) == 0.0);
+    ck_assert(double_2d_area_triangle(&a, &b, &c) == 0.0);
 
     a.x = 0;
     a.y = 0;
@@ -162,7 +162,7 @@ START_TEST(test_2d_area_triangle)
     b.y = 0;
     c.x = 0;
     c.y = 3;
-    ck_assert(coord_2d_dist(&a, &b, &c) == 4.5);
+    ck_assert(double_2d_area_triangle(&a, &b, &c) == 4.5);
 
     a.x = 0;
     a.y = 0;
@@ -170,7 +170,7 @@ START_TEST(test_2d_area_triangle)
     b.y = 3;
     c.x = 3;
     c.y = 0;
-    ck_assert(coord_2d_dist(&a, &b, &c) == 4.5);
+    ck_assert(double_2d_area_triangle(&a, &b, &c) == 4.5);
 
     a.x = 0;
     a.y = 0;
@@ -178,18 +178,21 @@ START_TEST(test_2d_area_triangle)
     b.y = 4;
     c.x = 3;
     c.y = 0;
-    ck_assert(coord_2d_dist(&a, &b, &c) == 6.0);
+    ck_assert(double_2d_area_triangle(&a, &b, &c) == 6.0);
 
     a.x = 1;
     a.y = 2;
     b.x = 4;
     b.y = 6;
     c.x = 3;
-    c.y = 5
-    ck_assert(coord_2d_dist(&a, &b, &c) == 0.5);
+    c.y = 5;
+    ck_assert(double_2d_area_triangle(&a, &b, &c) == 0.5);
 
 }
 END_TEST
+
+
+
 
 /* coord_2d Test Suite */
 Suite* coord_2d_suite(void)
@@ -208,18 +211,19 @@ Suite* coord_2d_suite(void)
     TCase* tc_2d_midpoint = tcase_create("coord_2d_midpoint");
     tcase_add_test(tc_2d_midpoint, test_2d_midpoint);
 
+    TCase* tc_2d_area_triangle = tcase_create("double_2d_area_triangle");
+    tcase_add_test(tc_2d_area_triangle, test_2d_area_triangle);
+
     /* Add Cases to Suite */
     suite_add_tcase(s, tc_2d_eq);
     suite_add_tcase(s, tc_2d_dist);
     suite_add_tcase(s, tc_2d_midpoint);
+    suite_add_tcase(s, tc_2d_area_triangle);
 
     /* Return Suite */
     return s;
 
 }
-
-
-
 
 /* main: run test suites and set exit status */
 int main(void){
