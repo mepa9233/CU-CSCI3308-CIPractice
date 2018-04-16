@@ -1,9 +1,7 @@
 install:
-	make
-	dep
+	make dep
 language: c
 compiler: gcc
 sudo: required
 script:
-	make
-	test
+	make test
